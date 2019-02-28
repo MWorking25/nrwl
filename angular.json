@@ -2,7 +2,201 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "",
-  "projects": {},
+  "projects": {
+    "ratefast": {
+      "root": "apps/ratefast/",
+      "sourceRoot": "apps/ratefast/src",
+      "projectType": "application",
+      "prefix": "RF",
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/ratefast",
+            "index": "apps/ratefast/src/index.html",
+            "main": "apps/ratefast/src/main.ts",
+            "polyfills": "apps/ratefast/src/polyfills.ts",
+            "tsConfig": "apps/ratefast/tsconfig.app.json",
+            "assets": [
+              "apps/ratefast/src/favicon.ico",
+              "apps/ratefast/src/assets"
+            ],
+            "styles": ["apps/ratefast/src/styles.scss"],
+            "scripts": [
+              {
+                "input": "node_modules/document-register-element/build/document-register-element.js"
+              }
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/ratefast/src/environments/environment.ts",
+                  "with": "apps/ratefast/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ratefast:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ratefast:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ratefast:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/ratefast/src/test.ts",
+            "polyfills": "apps/ratefast/src/polyfills.ts",
+            "tsConfig": "apps/ratefast/tsconfig.spec.json",
+            "karmaConfig": "apps/ratefast/karma.conf.js",
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "apps/ratefast/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "apps/ratefast/src/favicon.ico",
+              "apps/ratefast/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/ratefast/tsconfig.app.json",
+              "apps/ratefast/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "ratefast-e2e": {
+      "root": "apps/ratefast-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/builders:cypress",
+          "options": {
+            "cypressConfig": "apps/ratefast-e2e/cypress.json",
+            "tsConfig": "apps/ratefast-e2e/tsconfig.e2e.json",
+            "devServerTarget": "ratefast:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ratefast:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/ratefast-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "rflib": {
+      "root": "libs/rflib",
+      "sourceRoot": "libs/rflib/src",
+      "projectType": "library",
+      "prefix": "RF",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/rflib/src/test.ts",
+            "tsConfig": "libs/rflib/tsconfig.spec.json",
+            "karmaConfig": "libs/rflib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/rflib/tsconfig.lib.json",
+              "libs/rflib/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "elements": {
+      "root": "libs/elements",
+      "sourceRoot": "libs/elements/src",
+      "projectType": "library",
+      "prefix": "RF",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/elements/src/test.ts",
+            "tsConfig": "libs/elements/tsconfig.spec.json",
+            "karmaConfig": "libs/elements/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/elements/tsconfig.lib.json",
+              "libs/elements/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
+    }
+  },
   "cli": {
     "warnings": {
       "typescriptMismatch": false,
@@ -18,5 +212,6 @@
     "@nrwl/schematics:library": {
       "style": "scss"
     }
-  }
+  },
+  "defaultProject": "ratefast"
 }

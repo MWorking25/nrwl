@@ -7,5 +7,18 @@
     "tslint.json": "*",
     "nx.json": "*"
   },
-  "projects": {}
+  "projects": {
+    "ratefast": {
+      "tags": []
+    },
+    "ratefast-e2e": {
+      "tags": []
+    },
+    "rflib": {
+      "tags": []
+    },
+    "elements": {
+      "tags": []
+    }
+  }
 }
