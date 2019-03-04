@@ -9,7 +9,7 @@ import {CdkTreeModule} from '@angular/cdk/tree';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {CdkStepperModule} from '@angular/cdk/stepper';
 import {PortalModule} from '@angular/cdk/portal';
-
+import { BrowserModule } from '@angular/platform-browser';
 import {ButtonComponent} from '../../../elements/src/lib/button/button.component';
 
 import {
@@ -27,9 +27,11 @@ import { HeadersComponent } from './headers/headers.component';
 import { CountsDashComponent } from './counts-dash/counts-dash.component';
 import { AnalytsDashComponent } from './analyts-dash/analyts-dash.component';
 import { DashboardCountsDirective} from './directives/dashboard-counts.directive';
+import { ThemeingDirective } from './directives/themeing.directive';
 
 @NgModule({
   imports: [
+    BrowserModule,
     CommonModule,
     BrowserAnimationsModule,
     A11yModule,
@@ -85,6 +87,7 @@ import { DashboardCountsDirective} from './directives/dashboard-counts.directive
     AnalytsDashComponent,
     ButtonComponent,
     DashboardCountsDirective,
+    ThemeingDirective,
     
    ],
    exports:[

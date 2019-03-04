@@ -1,5 +1,5 @@
 
-<mat-toolbar class="toolbar"  [primarybg]="selectedprimarybg">  
+<mat-toolbar class="toolbar" color="primary">  
   <mat-toolbar-row  >
       <mat-icon mat-raised-button (click)="drawer.toggle()">menu</mat-icon>
         <span>Header</span>
@@ -100,8 +100,12 @@
     </mat-drawer>
 
 <mat-drawer-content>
-    <RF-headers></RF-headers>
+    <RF-headers>
+     
+    </RF-headers>
   <div class="container-fluid">
+
+      
       <router-outlet></router-outlet>
   </div>
  

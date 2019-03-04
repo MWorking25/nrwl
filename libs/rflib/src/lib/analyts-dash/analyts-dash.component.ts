@@ -7,13 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnalytsDashComponent implements OnInit {
 
-  accentbg : String = "rgb(255, 64, 129)";
-  numbers = [1,2,3,4,5,6,7,8]
+  numbers = [{id:1},{id:2},{id:3},{id:4},{id:5},{id:6},{id:7},{id:8}]
 
   constructor() { }
 
   ngOnInit() {
-    this.accentbg = localStorage.getItem('accentBg');
+
   }
 
   
