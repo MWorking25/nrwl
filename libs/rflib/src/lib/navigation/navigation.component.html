@@ -30,20 +30,23 @@
        
 
       </mat-toolbar>
-
+     
+       <mat-list role="list">
+              <mat-list-item class="ml-2" role="listitem"><mat-icon class="menu-icon" >dashboard</mat-icon>Home</mat-list-item>
+            </mat-list>
       <mat-accordion>
         <mat-expansion-panel (opened)="panelOpenState = true"
                              (closed)="panelOpenState = false">
           <mat-expansion-panel-header>
-            <mat-panel-title>
+            <mat-panel-title >
                 <mat-icon class="menu-icon" >dashboard</mat-icon>
-                Dashboard
+                Companies
             </mat-panel-title>  
           </mat-expansion-panel-header>
-          <mat-list role="list">
+          <!-- <mat-list role="list">
               <mat-list-item role="listitem"><mat-icon class="menu-icon" >chevron_right</mat-icon>Counts</mat-list-item>
               <mat-list-item role="listitem"><mat-icon class="menu-icon" >chevron_right</mat-icon>Analytics</mat-list-item>
-            </mat-list>
+            </mat-list> -->
         </mat-expansion-panel>
 
         <mat-expansion-panel (opened)="panelOpenState = true"

@@ -4,14 +4,6 @@ import { filter, map, buffer, pluck } from "rxjs/operators";
 import * as $ from 'jquery';
 
 
-
-
-const isNavigationEnd = (ev: Event) => ev instanceof NavigationEnd;
-/**
- * Check if an angular router 'Event' is instance of 'NavigationEnd' event
- */
-const isActivationEnd = (ev: Event) => ev instanceof ActivationEnd;
-
 @Component({
   selector: 'RF-navigation',
   templateUrl: './navigation.component.html',
@@ -22,14 +14,7 @@ export class NavigationComponent implements OnInit  {
  
   selectedprimarybg :string;
   selectedaccentBg :string;
-
-  bcLoadedData;
-  bcForDisplay;
-
   possition = null;
-
-
-  
   dataItems:Array<any> = [
     {primary:"rgb(48, 63, 159)",accent:"rgb(255, 64, 129)"},
     {primary:"rgb(25, 118, 210)",accent:"rgb(255, 82, 82)"},
@@ -39,13 +24,9 @@ export class NavigationComponent implements OnInit  {
     {primary:"rgb(0, 121, 107)",accent:"rgb(255, 171, 64)"},
   ];
 
-
-
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
-
-
             if(localStorage.getItem('primaryBg'))
             {
               this.selectedprimarybg = localStorage.getItem('primaryBg');
@@ -63,56 +44,24 @@ export class NavigationComponent implements OnInit  {
             {
               this.selectedaccentBg = "rgb(255, 64, 129)";
             }
-
-    const navigationEnd$ = this.router.events.pipe(filter(isNavigationEnd));
-
-
-
-    $("body").css("--accent",this.selectedaccentBg);
-    $("body").css("--primary", this.selectedprimarybg);
- 
-
-
-    this.router.events
-      .pipe(
-        filter(isActivationEnd),
-        pluck("snapshot"),
-        pluck("data"),
-        buffer(navigationEnd$),
-        map((bcData: any[]) => bcData.reverse())
-      )
-      .subscribe(x => {
-        this.bcLoadedData = x;
-
-        this.bcForDisplay = this.bcLoadedData.reduce((rootAcc, rootElement) => {
-          let breakIn = [];
-          if (rootElement.breakIn) {
-            breakIn = rootElement.breakIn.reduce(
-              (acc, e) => [...acc, `break in ${e}'s home`],
-              []
-            );
-          }
-          return [...rootAcc, rootElement.bc, ...breakIn];
-        }, []);
-      });
-  
-
+            
+            $("body").css("--accent",this.selectedaccentBg);
+            $("body").css("--primary", this.selectedprimarybg);
   }
 
 
-  setPossition(possition)
-  {
-    this.possition = possition;
-  };
+            setPossition(possition)
+            {
+              this.possition = possition;
+            };
 
-  SelectedItem(details)
-  {
-
-    localStorage.setItem('primaryBg', details.primary);
-    localStorage.setItem('accentBg', details.accent);
-    $("body").css("--accent",details.accent);
-    $("body").css("--primary", details.primary);   
-  };
+            SelectedItem(details)
+            {
+              localStorage.setItem('primaryBg', details.primary);
+              localStorage.setItem('accentBg', details.accent);
+              $("body").css("--accent",details.accent);
+              $("body").css("--primary", details.primary);   
+            };
 
 
 
