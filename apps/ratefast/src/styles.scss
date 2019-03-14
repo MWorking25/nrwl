@@ -10,10 +10,27 @@ body {
   
   --accent: rgb(255, 64, 129);
   --primary:rgb(48, 63, 159);
- 
+  --bgcolor1:rgb(255, 64, 129);
+  --bgcolor2:rgb(48, 63, 159);
+  --bgcolordeg:-90deg;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
 }
 
 
+.userprofile
+{
+    background-image: linear-gradient(var(--bgcolordeg), var(--bgcolor1), var(--bgcolor2));
+}
 
 
 

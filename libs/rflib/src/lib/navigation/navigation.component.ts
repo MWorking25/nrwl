@@ -1,8 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { Router, Event, ActivationEnd, NavigationEnd } from "@angular/router";
-import { filter, map, buffer, pluck } from "rxjs/operators";
 import * as $ from 'jquery';
-
 
 @Component({
   selector: 'RF-navigation',
@@ -11,10 +8,12 @@ import * as $ from 'jquery';
 })
 export class NavigationComponent implements OnInit  {
 
- 
-  selectedprimarybg :string;
-  selectedaccentBg :string;
-  possition = null;
+  profilebg = {
+    firstcolor: 'rgb(255, 64, 129)',
+    secondcolor:'rgb(48, 63, 159)',
+    colordegree:-90,
+  };
+
   dataItems:Array<any> = [
     {primary:"rgb(48, 63, 159)",accent:"rgb(255, 64, 129)"},
     {primary:"rgb(25, 118, 210)",accent:"rgb(255, 82, 82)"},
@@ -27,43 +26,26 @@ export class NavigationComponent implements OnInit  {
   constructor() { }
 
   ngOnInit() {
-            if(localStorage.getItem('primaryBg'))
-            {
-              this.selectedprimarybg = localStorage.getItem('primaryBg');
-            }
-            else
-            {
-              this.selectedprimarybg = "rgb(48, 63, 159)";
-            }
-
-            if(localStorage.getItem('accentBg'))
-            {
-              this.selectedaccentBg = localStorage.getItem('accentBg');
-            }
-            else
-            {
-              this.selectedaccentBg = "rgb(255, 64, 129)";
-            }
-            
-            $("body").css("--accent",this.selectedaccentBg);
-            $("body").css("--primary", this.selectedprimarybg);
+    this.setupTheme();
   }
 
+  setupTheme()
+  {
+    localStorage.getItem('primaryBg')?$("body").css("--primary", localStorage.getItem('primaryBg')):$("body").css("--primary", "rgb(48, 63, 159)");
+    localStorage.getItem('accentBg')?$("body").css("--accent",localStorage.getItem('accentBg')): $("body").css("--accent","rgb(255, 64, 129)");
+    localStorage.getItem('bgcolor1')? $("body").css("--bgcolor1",localStorage.getItem('bgcolor1')):  $("body").css("--bgcolor1",this.profilebg.firstcolor);
+    localStorage.getItem('bgcolor2')? $("body").css("--bgcolor2",localStorage.getItem('bgcolor2')):  $("body").css("--bgcolor2",this.profilebg.secondcolor);
+    localStorage.getItem('bgcolordeg')? $("body").css("--bgcolordeg",localStorage.getItem('bgcolordeg')):  $("body").css("--bgcolordeg",this.profilebg.colordegree+'deg');    
+  }
 
-            setPossition(possition)
-            {
-              this.possition = possition;
-            };
-
-            SelectedItem(details)
-            {
-              localStorage.setItem('primaryBg', details.primary);
-              localStorage.setItem('accentBg', details.accent);
-              $("body").css("--accent",details.accent);
-              $("body").css("--primary", details.primary);   
-            };
-
-
-
+  SelectedItem(details)
+  {
+    details.primary?localStorage.setItem('primaryBg', details.primary):'';
+    details.accent?localStorage.setItem('accentBg', details.accent):'';
+    details.firstcolor?localStorage.setItem('bgcolor1', details.firstcolor):'';
+    details.secondcolor?localStorage.setItem('bgcolor2', details.secondcolor):'';
+    details.colordegree?localStorage.setItem('bgcolordeg', details.colordegree+'deg'):'';
+    this.setupTheme();
+  };
 
 }

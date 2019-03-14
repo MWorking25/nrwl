@@ -1,0 +1,39 @@
+<div class="row">
+
+  <div class="col-md-12 col-12">
+      <div class="container py-5 pb-4 bg-faded">
+          <div class="card-columns mb-5">
+              <div class="card col-md-12 col-12"  *ngFor="let notes of notesList">
+                    <div class="col-12 col-md-12">
+                            <div class="text-left grey">{{notes.type}}</div>
+                            <hr>
+                        </div>
+                    <div class="col-12 col-md-12" [innerHTML]="notes.note + notes.link"></div>
+                  <div class="col-12 col-md-12">
+                      <hr>
+                      <div class="text-right grey">{{notes.createddate}}</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+    <div class="col-md-12 col-12 notes" >
+      <div class="row">
+        <div class="col-md-3 col-6">
+            <mat-form-field class="fullwidth" (click)="openBottomSheet('plain')">
+                <input matInput placeholder="Write Note" readonly>
+              </mat-form-field>
+        </div>
+        <div class="col-md-1 col-2 text-left mt-2">
+            <button mat-icon-button (click)="openBottomSheet('todo')"><mat-icon aria-label="Example icon-button with a heart icon">check_circle</mat-icon></button>
+        </div>
+        <div class="col-md-1 col-2 text-left mt-2">
+            <button mat-icon-button (click)="openBottomSheet('image')"><mat-icon aria-label="Example icon-button with a heart icon">image</mat-icon></button>
+        </div>
+        <div class="col-md-1 col-2 text-left mt-2">
+            <button mat-icon-button (click)="openBottomSheet('link')"><mat-icon aria-label="Example icon-button with a heart icon">link</mat-icon></button>
+        </div>
+      </div>
+    </div>
+</div>

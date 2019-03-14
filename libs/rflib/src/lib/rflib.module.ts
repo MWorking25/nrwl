@@ -11,7 +11,7 @@ import {CdkStepperModule} from '@angular/cdk/stepper';
 import {PortalModule} from '@angular/cdk/portal';
 import { BrowserModule } from '@angular/platform-browser';
 import {ButtonComponent} from '../../../elements/src/lib/button/button.component';
-
+import { FormsModule } from '@angular/forms';
 import {
   MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonModule,
   MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
@@ -28,11 +28,15 @@ import { CountsDashComponent } from './counts-dash/counts-dash.component';
 import { AnalytsDashComponent } from './analyts-dash/analyts-dash.component';
 import { DashboardCountsDirective} from './directives/dashboard-counts.directive';
 import { ThemeingDirective } from './directives/themeing.directive';
-
+import { KeepNotesComponent } from './keep-notes/keep-notes.component';
+import { WiteNoteComponent } from './keep-notes/wite-note/wite-note.component';
+import {KeepNotesService} from './services/keep-notes.service';
+import {BreadcrumbsService} from './services/breadcrumbs.service';
 @NgModule({
   imports: [
     BrowserModule,
     CommonModule,
+    FormsModule,
     BrowserAnimationsModule,
     A11yModule,
     CdkTableModule,
@@ -77,8 +81,8 @@ import { ThemeingDirective } from './directives/themeing.directive';
     ScrollingModule,
     PortalModule,
     RouterModule.forChild([
-       {path: '', component: NavigationComponent,children:[ {path:'Dashbord',component:CountsDashComponent},{ path: '', redirectTo: 'Dashbord', pathMatch: 'full'}, ]}, 
-    ])
+       {path: 'Dashboard', component: NavigationComponent,children:[{path:'',component:CountsDashComponent},{ path: 'Dashboard', redirectTo: 'Dashbord', pathMatch: 'full'},{path:'keepNotes',component:KeepNotesComponent}]}, 
+    ],)
   ],
   declarations: [
     NavigationComponent,
@@ -88,6 +92,8 @@ import { ThemeingDirective } from './directives/themeing.directive';
     ButtonComponent,
     DashboardCountsDirective,
     ThemeingDirective,
+    KeepNotesComponent,
+    WiteNoteComponent,
     
    ],
    exports:[
@@ -133,9 +139,17 @@ import { ThemeingDirective } from './directives/themeing.directive';
     MatTreeModule,
     ScrollingModule,
     PortalModule,
+    RouterModule,
    ],
    entryComponents:[
-     ButtonComponent
+     ButtonComponent,
+     WiteNoteComponent
+   ],
+   providers:[
+    WiteNoteComponent,
+    KeepNotesService,
+    KeepNotesComponent,
+    BreadcrumbsService
    ]
 })
 export class RflibModule {

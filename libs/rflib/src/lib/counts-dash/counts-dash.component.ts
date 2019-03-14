@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'RF-counts-dash',
   templateUrl: './counts-dash.component.html',
@@ -14,6 +14,7 @@ export class CountsDashComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    $('.float').css('display','block');
     if(localStorage.getItem('accentBg'))
     {
       this.selectedaccentbg = localStorage.getItem('accentBg');

@@ -1,0 +1,28 @@
+<form name="note">
+  <mat-form-field class="container-fluid" *ngIf="data.notetype === 'link'">
+      <input matInput class="fullwidth" name="notelink" placeholder="Link" [(ngModel)]="KeepNotes.link">
+  </mat-form-field>
+  <mat-form-field class="container-fluid">
+      <textarea matInput class="fullwidth" name="note" [(ngModel)]="KeepNotes.note" placeholder="Write Note"></textarea>
+    </mat-form-field>
+</form>
+    <div class="container-fluid" *ngIf="data.notetype === 'todo'">
+      <mat-list role="list">
+        <mat-list-item role="listitem">
+          <mat-checkbox>Item 1!</mat-checkbox>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <mat-checkbox>Item 2!</mat-checkbox>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <mat-checkbox>Item 3!</mat-checkbox>
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+
+    <div class="container-fluid" *ngIf="data.notetype === 'image'">
+
+    </div>
+    
+<div class="container-fluid"><button mat-button mat-stroked-button class="col-md-12 col-12" (click)="KeepANote()">Save</button></div>
